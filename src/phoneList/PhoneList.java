@@ -1,6 +1,10 @@
 package phoneList;
 
+import java.util.ArrayList;
+
 import java.util.Scanner;
+
+//import notes02_ArrayLists.Student;
 
 /*
  * Phone List
@@ -26,17 +30,18 @@ import java.util.Scanner;
 
 public class PhoneList {
 
+	ArrayList<Contact> contacts;
+	
 	/*
 	 * Instance Variables
 	 */
 	
 	
-	
 	//Constructor
 	public PhoneList() {
 		//initialize instance variables
+		contacts = new ArrayList<Contact>();
 	}
-	
 	
 	/*
 	 * This should do the following
@@ -49,7 +54,20 @@ public class PhoneList {
 	 *   - tell the user what the new contact is and that 
 	 *        it's been added
 	 */
-	public static void addContact() {
+	public void addContact() {
+		
+		Scanner inKey = new Scanner(System.in);
+		System.out.println("What is the contacts name?: ");
+		String name = inKey.nextLine();
+		System.out.println("What is the contacts phone number?: ");
+		long num = inKey.nextLong();
+		
+		Contact c1 = new Contact (name, num);
+		
+		contacts.add(c1);
+		System.out.println(c1);  
+	
+	
 		
 		
 	}
@@ -70,8 +88,25 @@ public class PhoneList {
 	 *        Remove the item from the list
 	 *        
 	 */
-	public static void removeContact() {
+	public void removeContact() {
 		
+		Scanner inKey = new Scanner(System.in);
+		System.out.println("What is the contacts name?: ");
+		String name = inKey.nextLine();
+		Boolean Contactfound = false;
+		
+		for (int i = 0; i < contacts.size(); i++) {
+			
+			if (name.equalsIgnoreCase(contacts.get(i).getName())) {
+				System.out.println("Removing Contact: " + contacts.get(i));
+				contacts.remove(i);
+				Contactfound = true;
+				break;
+			}
+		}
+		if (Contactfound == false) {
+			System.out.println("Contact " + name + "is not found");
+		}
 		
 	}
 	
@@ -87,7 +122,16 @@ public class PhoneList {
 	 *          -----------------
 	 *          #################
 	 */
-	public static void printList() {
+	public void printList() {
+		
+		System.out.println("Contacts:");
+		System.out.println("❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤");
+		
+		
+		for (int i = 0; i < contacts.size(); i++) {
+			System.out.println(contacts.get(i));
+			System.out.println("❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤❤");
+		}
 		
 	}
 
@@ -101,7 +145,7 @@ public class PhoneList {
 	 * of how to manage them.
 	 * 
 	 */
-	public static void menu() {
+	public void menu() {
 		
 		int input = 0;
 		
@@ -155,7 +199,7 @@ public class PhoneList {
 		
 	}
 	
-	public static String getString(String str) {
+	public String getString(String str) {
 		
 		Scanner inKey = new Scanner(System.in);
 		System.out.print(str);  //notice it's NOT a print line.  This way input is next to question.
